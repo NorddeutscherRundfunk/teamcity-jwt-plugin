@@ -9,11 +9,7 @@
      <file>
          <source>target/teamcity-plugin.xml</source>
          <outputDirectory>/</outputDirectory>
-     </file> 
-     <file>
-         <source>target/jwt-plugin-agent.zip</source>
-         <outputDirectory>agent</outputDirectory>
-     </file> 
+     </file>
   </files>
   <moduleSets>
     <moduleSet>
