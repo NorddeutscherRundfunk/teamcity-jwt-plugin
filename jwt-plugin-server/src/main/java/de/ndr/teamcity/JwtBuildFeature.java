@@ -4,6 +4,7 @@ import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
+import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.*;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
@@ -66,8 +67,10 @@ public class JwtBuildFeature extends BuildFeature {
         File keyFile = new File(directory + File.separator + "key.json");
         JWK jwk;
         if (!keyFile.exists()) {
+            Loggers.SERVER.info("Read existing key from: " + keyFile);
             jwk = JWK.parse(FileUtils.readFileToString(keyFile, Charset.defaultCharset()));
         } else {
+            Loggers.SERVER.info("Generate new key to: " + keyFile);
             KeyPairGenerator gen = KeyPairGenerator.getInstance("RSA");
             gen.initialize(2048);
             KeyPair keyPair = gen.generateKeyPair();
