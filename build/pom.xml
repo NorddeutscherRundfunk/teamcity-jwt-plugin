@@ -10,9 +10,9 @@
   <packaging>pom</packaging>
   <properties>
       <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-      <teamcity.jwt-plugin.plugin.version>snapshot-${maven.build.timestamp}</teamcity.jwt-plugin.plugin.version>
-      <teamcity.jwt-plugin.plugin.vendorName>Plugin vendor name</teamcity.jwt-plugin.plugin.vendorName>
-      <teamcity.jwt-plugin.plugin.vendorUrl>Plugin vendor URL</teamcity.jwt-plugin.plugin.vendorUrl>
+      <teamcity.jwt-plugin.plugin.version>${parent.version}</teamcity.jwt-plugin.plugin.version>
+      <teamcity.jwt-plugin.plugin.vendorName>NDR</teamcity.jwt-plugin.plugin.vendorName>
+      <teamcity.jwt-plugin.plugin.vendorUrl>https://www.ndr.de</teamcity.jwt-plugin.plugin.vendorUrl>
   </properties>
   <dependencies>
       <dependency>
@@ -27,7 +27,7 @@
             <groupId>com.google.code.maven-replacer-plugin</groupId>
             <artifactId>replacer</artifactId>
             <version>1.5.3</version>
-            <executions>                
+            <executions>
                 <execution>
                     <phase>process-sources</phase>
                     <goals>
@@ -51,7 +51,7 @@
                         <token>@VendorURL@</token>
                         <value>${teamcity.jwt-plugin.plugin.vendorUrl}</value>
                     </replacement>
-                </replacements>                        
+                </replacements>
             </configuration>
         </plugin>
         <plugin>

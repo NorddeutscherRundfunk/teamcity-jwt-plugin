@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.ndr.teamcity</groupId>
-  <artifactId>jwt-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <properties>
-      <teamcity-version>2024.07</teamcity-version>
-      <maven.compiler.source>17</maven.compiler.source>
-      <maven.compiler.target>17</maven.compiler.target>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.ndr.teamcity</groupId>
+    <artifactId>jwt-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>git@github.com:NorddeutscherRundfunk/teamcity-jwt-plugin.git</url>
+        <tag>HEAD</tag>
+    </scm>
+    <properties>
+        <teamcity-version>2024.07</teamcity-version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
-  <repositories>
-    <repository>
-        <id>JetBrains</id>
-        <url>https://download.jetbrains.com/teamcity-repository</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-      <pluginRepository>
-          <id>JetBrains</id>
-          <url>https://download.jetbrains.com/teamcity-repository</url>
-      </pluginRepository>
-  </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>JetBrains</id>
+            <url>https://download.jetbrains.com/teamcity-repository</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>JetBrains</id>
+            <url>https://download.jetbrains.com/teamcity-repository</url>
+        </pluginRepository>
+    </pluginRepositories>
     <dependencies>
         <dependency>
             <groupId>com.nimbusds</groupId>
@@ -45,59 +52,47 @@
             <version>0.12.6</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- Uncomment this next dependency if you are using:
-             - JDK 10 or earlier, and you want to use RSASSA-PSS (PS256, PS384, PS512) signature algorithms.
-             - JDK 10 or earlier, and you want to use EdECDH (X25519 or X448) Elliptic Curve Diffie-Hellman encryption.
-             - JDK 14 or earlier, and you want to use EdDSA (Ed25519 or Ed448) Elliptic Curve signature algorithms.
-             It is unnecessary for these algorithms on JDK 15 or later.
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId> or bcprov-jdk15to18 on JDK 7
-            <version>1.76</version>
-            <scope>runtime</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.13.0</version>
         </dependency>
     </dependencies>
-  <build>
-      <plugins>
-          <plugin>
-              <groupId>org.jetbrains.teamcity</groupId>
-              <artifactId>teamcity-sdk-maven-plugin</artifactId>
-              <version>0.4.3</version>
-              <configuration>
-                   <teamcityDir>/Users/svs/TeamCity</teamcityDir>
-              </configuration>
-          </plugin>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>3.13.0</version>
-              <configuration>
-                  <source>17</source>
-                  <target>17</target>
-              </configuration>
-          </plugin>
-      </plugins>
-      <pluginManagement>
-          <plugins>
-              <plugin>
-                  <groupId>org.jetbrains.teamcity</groupId>
-                  <artifactId>teamcity-sdk-maven-plugin</artifactId>
-                  <version>0.4.3</version>
-                  <configuration>
-                      <teamcityDir>/Users/svs/TeamCity</teamcityDir>
-                  </configuration>
-              </plugin>
-          </plugins>
-      </pluginManagement>
-  </build>
-  <modules>
-    <module>jwt-plugin-server</module>
-    <module>build</module>
-  </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>teamcity-sdk-maven-plugin</artifactId>
+                <version>0.4.3</version>
+                <configuration>
+                    <teamcityDir>/Users/svs/TeamCity</teamcityDir>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jetbrains.teamcity</groupId>
+                    <artifactId>teamcity-sdk-maven-plugin</artifactId>
+                    <version>0.4.3</version>
+                    <configuration>
+                        <teamcityDir>/Users/svs/TeamCity</teamcityDir>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <modules>
+        <module>jwt-plugin-server</module>
+        <module>build</module>
+    </modules>
 </project>

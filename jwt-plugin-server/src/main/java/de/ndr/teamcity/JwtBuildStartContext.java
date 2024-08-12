@@ -2,7 +2,6 @@ package de.ndr.teamcity;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.RSASSASigner;
-import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
@@ -57,6 +56,7 @@ public class JwtBuildStartContext implements BuildStartContextProcessor  {
                         .expirationTime(now.plusHours(1).toDate()) // exp
                         .claim("branch", ObjectUtils.defaultIfNull(build.getBranch(), ""))
                         .claim("build_type_external_id", build.getBuildTypeExternalId())
+                        .claim("project_external_id", build.getProjectExternalId())
                         .claim("triggered_by_id", build.getTriggeredBy().getUser().getId())
                         .claim("triggered_by", build.getTriggeredBy().getAsString())
                         .claim("build_number", build.getBuildNumber())
@@ -66,7 +66,6 @@ public class JwtBuildStartContext implements BuildStartContextProcessor  {
                 JWSSigner signer = new RSASSASigner(rsaKey);
                 signedJWT.sign(signer);
 
-                buildStartContext.addSharedParameter("env.JWKS", new JWKSet(rsaKey.toPublicJWK()).toString());
                 buildStartContext.addSharedParameter("env.JWT", signedJWT.serialize());
             } catch (JOSEException e) {
                 throw new RuntimeException(e);
