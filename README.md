@@ -4,11 +4,9 @@ Plugin to enable generation of JWT in TeamCity.
 Can be used to authenticate to GCP or AWS without the need of Vault or 
 generating static SA keys.
 
-- Enable Build Feature "JWT" on your favourite build
-- Environment variables will be set:
-  - JWT: JSON web token
-  - JWKS: JSON web key set
-- Configure your OIDC consumer to accept the generated JWT, validated by the JWKS provided
+- Enable Build feature "JWT" on your favourite build
+- Environment variable JWT (JSON web token) will be set
+- Configure your OIDC consumer to accept the generated JWT, validated by the JWKS provided under Administration -> Integrations -> JWT build feature
 
 Payload of JWT looks like this
 ```json
