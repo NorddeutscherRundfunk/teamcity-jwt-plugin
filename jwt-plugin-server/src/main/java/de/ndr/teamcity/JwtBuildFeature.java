@@ -66,7 +66,7 @@ public class JwtBuildFeature extends BuildFeature {
         directory.mkdirs();
         File keyFile = new File(directory + File.separator + "key.json");
         JWK jwk;
-        if (!keyFile.exists()) {
+        if (keyFile.exists()) {
             Loggers.SERVER.info("Read existing key from: " + keyFile);
             jwk = JWK.parse(FileUtils.readFileToString(keyFile, Charset.defaultCharset()));
         } else {
