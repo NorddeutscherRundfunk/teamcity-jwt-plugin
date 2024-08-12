@@ -23,13 +23,9 @@ public class JwtBuildFeature extends BuildFeature {
     private final ServerPaths serverPaths;
     private final RSAKey rsaKey;
 
-    public JwtBuildFeature(@NotNull ServerPaths serverPaths) {
+    public JwtBuildFeature(@NotNull ServerPaths serverPaths) throws NoSuchAlgorithmException, IOException, ParseException {
         this.serverPaths = serverPaths;
-        try {
-            rsaKey = this.generateRSAKey();
-        } catch (IOException | NoSuchAlgorithmException | ParseException e) {
-            throw new RuntimeException(e);
-        }
+        rsaKey = this.generateRSAKey();
     }
 
     public RSAKey getRsaKey() {
