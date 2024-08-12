@@ -5,6 +5,7 @@
        default-autowire="constructor">
     <bean id="jwtBuildFeature" class="de.ndr.teamcity.JwtBuildFeature" />
     <bean id="jwtBuildStartContext" class="de.ndr.teamcity.JwtBuildStartContext" init-method="register" />
+    <bean id="jwtBuildFeatureAdminPage" class="de.ndr.teamcity.JwtBuildFeatureAdminPage"/>
 
 </beans>
 
