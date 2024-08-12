@@ -7,8 +7,8 @@ generating static SA keys.
 - Enable Build Feature "JWT" on your favourite build
 - Environment variables will be set:
   - JWT: JSON web token
-  - JWK: JSON web key
-- Configure your OIDC consumer to accept the generated JWT, validated by the JWK provided
+  - JWKS: JSON web key set
+- Configure your OIDC consumer to accept the generated JWT, validated by the JWKS provided
 
 Payload of JWT looks like this
 ```json
