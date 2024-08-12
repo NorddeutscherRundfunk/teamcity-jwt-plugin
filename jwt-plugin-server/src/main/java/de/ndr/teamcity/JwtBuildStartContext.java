@@ -20,7 +20,7 @@ public class JwtBuildStartContext implements BuildStartContextProcessor  {
 
     private final SBuildServer buildServer;
 
-    public JwtBuildStartContext(@NotNull final ExtensionHolder extensionHolder, @NotNull ServerPaths serverPaths, @NotNull SBuildServer buildServer) {
+    public JwtBuildStartContext(@NotNull final ExtensionHolder extensionHolder, @NotNull SBuildServer buildServer) {
         this.extensionHolder = extensionHolder;
         this.buildServer = buildServer;
     }
