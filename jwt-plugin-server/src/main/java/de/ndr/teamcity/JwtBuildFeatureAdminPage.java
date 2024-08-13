@@ -24,7 +24,7 @@ public class JwtBuildFeatureAdminPage extends AdminPage {
         setPluginName("jwtPlugin");
         setIncludeUrl(descriptor.getPluginResourcesPath(PAGE));
         setTabTitle(TAB_TITLE);
-        setPosition(PositionConstraint.after("clouds", "email", "jabber"));
+        setPosition(PositionConstraint.last());
         register();
     }
 

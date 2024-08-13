@@ -1,7 +1,9 @@
 package de.ndr.teamcity;
 
+import com.nimbusds.jose.jwk.RSAKey;
 import jetbrains.buildServer.serverSide.ServerPaths;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -14,9 +16,8 @@ import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class JwtBuildFeatureTest {
@@ -27,31 +28,29 @@ public class JwtBuildFeatureTest {
     @TempDir
     private File tempDir;
 
+    @Mock
+    private RsaKeyGenerator rsaKeyGenerator;
+
     @Test
-    public void testGetRsaKeyCreatesFile() throws NoSuchAlgorithmException, IOException, ParseException {
-        File pluginDirectory = new File(tempDir + File.separator + new File("foobar"));
-        pluginDirectory.mkdirs();
-        when(serverPaths.getPluginDataDirectory()).thenReturn(pluginDirectory);
-        File keyFile = new File(pluginDirectory + File.separator + "JwtBuildFeature" + File.separator + "key.json");
+    public void testGetter() throws NoSuchAlgorithmException, IOException, ParseException {
         JwtBuildFeature jwtBuildFeature = new JwtBuildFeature(serverPaths);
-        assertTrue(keyFile.exists());
-        assertEquals(jwtBuildFeature.getRsaKey().toString(), FileUtils.readFileToString(keyFile, Charset.defaultCharset()));
+
+        assertEquals(jwtBuildFeature.getType(), JwtBuildFeature.PLUGIN_TYPE);
+        assertEquals(jwtBuildFeature.getDisplayName(), JwtBuildFeature.DISPLAY_NAME);
+        assertEquals(jwtBuildFeature.getEditParametersUrl(), StringUtils.EMPTY);
+        assertFalse(jwtBuildFeature.isRequiresAgent());
+        assertFalse(jwtBuildFeature.isMultipleFeaturesPerBuildTypeAllowed());
     }
 
     @Test
-    public void testGetRsaKeyReusesFile() throws NoSuchAlgorithmException, IOException, ParseException {
+    public void createsRsaKeyInKeyFile() throws NoSuchAlgorithmException, IOException, ParseException {
+        when(serverPaths.getPluginDataDirectory()).thenReturn(tempDir);
+        File keyFile = new File(tempDir + File.separator + "JwtBuildFeature" + File.separator + "key.json");
 
-        File pluginDirectory = new File(tempDir + File.separator + new File("foobar"));
-        pluginDirectory.mkdirs();
-        when(serverPaths.getPluginDataDirectory()).thenReturn(pluginDirectory);
-        File keyFile = new File(pluginDirectory + File.separator + "JwtBuildFeature" + File.separator + "key.json");
-
-        new JwtBuildFeature(serverPaths);
-        String keyFileContents = FileUtils.readFileToString(keyFile, Charset.defaultCharset());
-
-        new JwtBuildFeature(serverPaths);
-        String keyFileContents2 = FileUtils.readFileToString(keyFile, Charset.defaultCharset());
-        assertEquals(keyFileContents, keyFileContents2);
+        RSAKey rsaKey = new JwtBuildFeature(serverPaths).getRsaKey();
+        assertNotNull(rsaKey);
+        assertTrue(keyFile.exists());
+        assertEquals(FileUtils.readFileToString(keyFile, Charset.defaultCharset()), rsaKey.toString());
     }
 
 }
