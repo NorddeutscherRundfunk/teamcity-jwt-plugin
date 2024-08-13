@@ -1,5 +1,7 @@
-package de.ndr.teamcity;
+package teamcity;
 
+import de.ndr.teamcity.JwtBuildFeature;
+import de.ndr.teamcity.JwtBuildStartContext;
 import jetbrains.buildServer.ExtensionHolder;
 import jetbrains.buildServer.serverSide.*;
 import jetbrains.buildServer.users.SUser;
