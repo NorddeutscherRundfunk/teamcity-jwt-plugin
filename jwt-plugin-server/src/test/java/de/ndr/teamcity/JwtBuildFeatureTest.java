@@ -1,6 +1,5 @@
-package teamcity;
+package de.ndr.teamcity;
 
-import de.ndr.teamcity.JwtBuildFeature;
 import jetbrains.buildServer.serverSide.ServerPaths;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
