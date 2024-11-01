@@ -30,7 +30,7 @@ public class JwtBuildStartContext implements BuildStartContextProcessor  {
 
     @Override
     public void updateParameters(@NotNull final BuildStartContext buildStartContext) {
-        Collection<SBuildFeatureDescriptor> jwtBuildFeatures = buildStartContext.getBuild().getBuildFeaturesOfType("JWT-Plugin");
+        Collection<SBuildFeatureDescriptor> jwtBuildFeatures = buildStartContext.getBuild().getBuildFeaturesOfType(JwtBuildFeature.PLUGIN_TYPE);
 
         if (!jwtBuildFeatures.isEmpty()) {
             try {
