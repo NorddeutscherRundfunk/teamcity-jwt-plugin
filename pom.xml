@@ -13,7 +13,7 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <teamcity-version>2024.07</teamcity-version>
+        <teamcity-version>2024.12</teamcity-version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
